@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>Socials.Infrastructure.IntegrationTests</RootNamespace>
+    <AssemblyName>Socials.Infrastructure.IntegrationTests</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+	<PackageReference Include="NUnit" />
+	<PackageReference Include="NUnit3TestAdapter" />
+	<PackageReference Include="NUnit.Analyzers" />
+	<PackageReference Include="coverlet.collector" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Infrastructure\Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

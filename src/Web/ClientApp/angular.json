@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Web": {
+    "Socials.Web": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -30,8 +30,7 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -41,7 +40,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "1mb",
-                  "maximumError": "2mb"
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -72,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "Web:build:production"
+              "browserTarget": "Socials.Web:build:production"
             },
             "development": {
-              "browserTarget": "Web:build:development",
+              "browserTarget": "Socials.Web:build:development",
               "proxyConfig": "proxy.conf.js"
             }
           },
@@ -84,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Web:build"
+            "browserTarget": "Socials.Web:build"
           }
         },
         "test": {
@@ -98,7 +97,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           }
@@ -132,5 +131,8 @@
       }
     }
   },
-  "defaultProject": "Web"
+  "defaultProject": "Socials.Web",
+  "cli": {
+    "analytics": false
+  }
 }
