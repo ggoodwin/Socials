@@ -9,7 +9,7 @@ namespace Socials.Application.FunctionalTests;
 
 public class SqlServerTestDatabase : ITestDatabase
 {
-    private readonly string _connectionString = null!;
+    private readonly string _connectionString;
     private SqlConnection _connection = null!;
     private Respawner _respawner = null!;
 
@@ -27,7 +27,7 @@ public class SqlServerTestDatabase : ITestDatabase
         _connectionString = connectionString;
     }
 
-    public async Task InitialiseAsync()
+    public async Task InitializeAsync()
     {
         _connection = new SqlConnection(_connectionString);
 

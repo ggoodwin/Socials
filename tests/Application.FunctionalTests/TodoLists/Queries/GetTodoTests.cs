@@ -6,7 +6,7 @@ namespace Socials.Application.FunctionalTests.TodoLists.Queries;
 
 using static Testing;
 
-public class GetTodosTests : BaseTestFixture
+public class GetTodoTests : BaseTestFixture
 {
     [Test]
     public async Task ShouldReturnPriorityLevels()
@@ -28,7 +28,7 @@ public class GetTodosTests : BaseTestFixture
         await AddAsync(new TodoList
         {
             Title = "Shopping",
-            Colour = Colour.Blue,
+            Color = Color.Blue,
             Items =
                     {
                         new TodoItem { Title = "Apples", Done = true },

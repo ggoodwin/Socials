@@ -4,7 +4,7 @@ namespace Socials.Application.FunctionalTests;
 
 public interface ITestDatabase
 {
-    Task InitialiseAsync();
+    Task InitializeAsync();
 
     DbConnection GetConnection();
 

@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using Socials.Application.Common.Interfaces;
+﻿using Socials.Application.Common.Interfaces;
 using MediatR.Pipeline;
 using Microsoft.Extensions.Logging;
 
-namespace Socials.Application.Common.Behaviours;
+namespace Socials.Application.Common.Behaviors;
 
 public class LoggingBehavior<TRequest> : IRequestPreProcessor<TRequest> where TRequest : notnull
 {

@@ -942,7 +942,7 @@ export interface ILookupDto {
 export class TodoListDto implements ITodoListDto {
     id?: number;
     title?: string | undefined;
-    colour?: string | undefined;
+    color?: string | undefined;
     items?: TodoItemDto[];
 
     constructor(data?: ITodoListDto) {
@@ -958,7 +958,7 @@ export class TodoListDto implements ITodoListDto {
         if (_data) {
             this.id = _data["id"];
             this.title = _data["title"];
-            this.colour = _data["colour"];
+            this.color = _data["color"];
             if (Array.isArray(_data["items"])) {
                 this.items = [] as any;
                 for (let item of _data["items"])
@@ -978,7 +978,7 @@ export class TodoListDto implements ITodoListDto {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["title"] = this.title;
-        data["colour"] = this.colour;
+        data["color"] = this.color;
         if (Array.isArray(this.items)) {
             data["items"] = [];
             for (let item of this.items)
@@ -991,7 +991,7 @@ export class TodoListDto implements ITodoListDto {
 export interface ITodoListDto {
     id?: number;
     title?: string | undefined;
-    colour?: string | undefined;
+    color?: string | undefined;
     items?: TodoItemDto[];
 }
 

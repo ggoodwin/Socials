@@ -7,21 +7,21 @@ using Testcontainers.MsSql;
 
 namespace Socials.Application.FunctionalTests;
 
-public class TestcontainersTestDatabase : ITestDatabase
+public class TestContainersTestDatabase : ITestDatabase
 {
     private readonly MsSqlContainer _container;
     private DbConnection _connection = null!;
     private string _connectionString = null!;
     private Respawner _respawner = null!;
 
-    public TestcontainersTestDatabase()
+    public TestContainersTestDatabase()
     {
         _container = new MsSqlBuilder()
             .WithAutoRemove(true)
             .Build();
     }
 
-    public async Task InitialiseAsync()
+    public async Task InitializeAsync()
     {
         await _container.StartAsync();
 

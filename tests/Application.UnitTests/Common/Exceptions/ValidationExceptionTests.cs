@@ -15,6 +15,22 @@ public class ValidationExceptionTests
         actual.Keys.Should().BeEquivalentTo(Array.Empty<string>());
     }
 
+    private static readonly string[] Expectation = new string[] { "Age" };
+    private static readonly string[] ExpectationArray = new string[] { "must be over 18" };
+    private static readonly string[] Expectation2 = new string[] { "Password", "Age" };
+    private static readonly string[] Expectation3 = new string[]
+        {
+                "must be 25 or younger",
+                "must be 18 or older",
+        };
+    private static readonly string[] Expectation4 = new string[]
+        {
+                "must contain lower case letter",
+                "must contain upper case letter",
+                "must contain at least 8 characters",
+                "must contain a digit",
+        };
+
     [Test]
     public void SingleValidationFailureCreatesASingleElementErrorDictionary()
     {
@@ -25,12 +41,12 @@ public class ValidationExceptionTests
 
         var actual = new ValidationException(failures).Errors;
 
-        actual.Keys.Should().BeEquivalentTo(new string[] { "Age" });
-        actual["Age"].Should().BeEquivalentTo(new string[] { "must be over 18" });
+        actual.Keys.Should().BeEquivalentTo(Expectation);
+        actual["Age"].Should().BeEquivalentTo(ExpectationArray);
     }
 
     [Test]
-    public void MulitpleValidationFailureForMultiplePropertiesCreatesAMultipleElementErrorDictionaryEachWithMultipleValues()
+    public void MultipleValidationFailureForMultiplePropertiesCreatesAMultipleElementErrorDictionaryEachWithMultipleValues()
     {
         var failures = new List<ValidationFailure>
             {
@@ -44,20 +60,10 @@ public class ValidationExceptionTests
 
         var actual = new ValidationException(failures).Errors;
 
-        actual.Keys.Should().BeEquivalentTo(new string[] { "Password", "Age" });
+        actual.Keys.Should().BeEquivalentTo(Expectation2);
 
-        actual["Age"].Should().BeEquivalentTo(new string[]
-        {
-                "must be 25 or younger",
-                "must be 18 or older",
-        });
+        actual["Age"].Should().BeEquivalentTo(Expectation3);
 
-        actual["Password"].Should().BeEquivalentTo(new string[]
-        {
-                "must contain lower case letter",
-                "must contain upper case letter",
-                "must contain at least 8 characters",
-                "must contain a digit",
-        });
+        actual["Password"].Should().BeEquivalentTo(Expectation4);
     }
 }

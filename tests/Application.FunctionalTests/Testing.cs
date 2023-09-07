@@ -11,24 +11,24 @@ namespace Socials.Application.FunctionalTests;
 [SetUpFixture]
 public partial class Testing
 {
-    private static ITestDatabase _database;
-    private static CustomWebApplicationFactory _factory = null!;
-    private static IServiceScopeFactory _scopeFactory = null!;
-    private static string? _userId;
+    private static ITestDatabase s_database;
+    private static CustomWebApplicationFactory s_factory = null!;
+    private static IServiceScopeFactory s_scopeFactory = null!;
+    private static string? s_userId;
 
     [OneTimeSetUp]
     public async Task RunBeforeAnyTests()
     {
-        _database = await TestDatabaseFactory.CreateAsync();
+        s_database = await TestDatabaseFactory.CreateAsync();
 
-        _factory = new CustomWebApplicationFactory(_database.GetConnection());
+        s_factory = new CustomWebApplicationFactory(s_database.GetConnection());
 
-        _scopeFactory = _factory.Services.GetRequiredService<IServiceScopeFactory>();
+        s_scopeFactory = s_factory.Services.GetRequiredService<IServiceScopeFactory>();
     }
 
     public static async Task<TResponse> SendAsync<TResponse>(IRequest<TResponse> request)
     {
-        using var scope = _scopeFactory.CreateScope();
+        using var scope = s_scopeFactory.CreateScope();
 
         var mediator = scope.ServiceProvider.GetRequiredService<ISender>();
 
@@ -37,7 +37,7 @@ public partial class Testing
 
     public static async Task SendAsync(IBaseRequest request)
     {
-        using var scope = _scopeFactory.CreateScope();
+        using var scope = s_scopeFactory.CreateScope();
 
         var mediator = scope.ServiceProvider.GetRequiredService<ISender>();
 
@@ -46,7 +46,7 @@ public partial class Testing
 
     public static string? GetUserId()
     {
-        return _userId;
+        return s_userId;
     }
 
     public static async Task<string> RunAsDefaultUserAsync()
@@ -61,7 +61,7 @@ public partial class Testing
 
     public static async Task<string> RunAsUserAsync(string userName, string password, string[] roles)
     {
-        using var scope = _scopeFactory.CreateScope();
+        using var scope = s_scopeFactory.CreateScope();
 
         var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
@@ -69,7 +69,7 @@ public partial class Testing
 
         var result = await userManager.CreateAsync(user, password);
 
-        if (roles.Any())
+        if (roles.Length != 0)
         {
             var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
@@ -83,9 +83,9 @@ public partial class Testing
 
         if (result.Succeeded)
         {
-            _userId = user.Id;
+            s_userId = user.Id;
 
-            return _userId;
+            return s_userId;
         }
 
         var errors = string.Join(Environment.NewLine, result.ToApplicationResult().Errors);
@@ -97,19 +97,20 @@ public partial class Testing
     {
         try
         {
-            await _database.ResetAsync();
+            await s_database.ResetAsync();
         }
         catch (Exception) 
         {
+            // ignored
         }
 
-        _userId = null;
+        s_userId = null;
     }
 
     public static async Task<TEntity?> FindAsync<TEntity>(params object[] keyValues)
         where TEntity : class
     {
-        using var scope = _scopeFactory.CreateScope();
+        using var scope = s_scopeFactory.CreateScope();
 
         var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
@@ -119,7 +120,7 @@ public partial class Testing
     public static async Task AddAsync<TEntity>(TEntity entity)
         where TEntity : class
     {
-        using var scope = _scopeFactory.CreateScope();
+        using var scope = s_scopeFactory.CreateScope();
 
         var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
@@ -130,7 +131,7 @@ public partial class Testing
 
     public static async Task<int> CountAsync<TEntity>() where TEntity : class
     {
-        using var scope = _scopeFactory.CreateScope();
+        using var scope = s_scopeFactory.CreateScope();
 
         var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
@@ -140,7 +141,7 @@ public partial class Testing
     [OneTimeTearDown]
     public async Task RunAfterAnyTests()
     {
-        await _database.DisposeAsync();
-        await _factory.DisposeAsync();
+        await s_database.DisposeAsync();
+        await s_factory.DisposeAsync();
     }
 }

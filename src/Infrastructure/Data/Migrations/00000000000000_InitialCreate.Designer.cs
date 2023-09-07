@@ -317,7 +317,7 @@ namespace Socials.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Socials.Domain.Entities.TodoList", b =>
                 {
-                    b.OwnsOne("Socials.Domain.ValueObjects.Colour", "Colour", b1 =>
+                    b.OwnsOne("Socials.Domain.ValueObjects.Color", "Color", b1 =>
                         {
                             b1.Property<int>("TodoListId")
                                 .HasColumnType("int");
@@ -334,7 +334,7 @@ namespace Socials.Infrastructure.Data.Migrations
                                 .HasForeignKey("TodoListId");
                         });
 
-                    b.Navigation("Colour")
+                    b.Navigation("Color")
                         .IsRequired();
                 });
 

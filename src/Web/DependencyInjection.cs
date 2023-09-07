@@ -33,7 +33,7 @@ public static class DependencyInjection
             return new FluentValidationSchemaProcessor(provider, validationRules, loggerFactory);
         });
 
-        // Customise default API behaviour
+        // Customize default API behavior
         services.Configure<ApiBehaviorOptions>(options =>
             options.SuppressModelStateInvalidFilter = true);
 

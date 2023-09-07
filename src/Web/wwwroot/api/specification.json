@@ -501,7 +501,7 @@
             "type": "string",
             "nullable": true
           },
-          "colour": {
+          "color": {
             "type": "string",
             "nullable": true
           },

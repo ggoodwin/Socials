@@ -35,14 +35,17 @@ public class MappingTests
     [TestCase(typeof(TodoList), typeof(LookupDto))]
     [TestCase(typeof(TodoItem), typeof(LookupDto))]
     [TestCase(typeof(TodoItem), typeof(TodoItemBriefDto))]
+    // TODO: Add more test cases and assertions
+#pragma warning disable S2699 // Tests should include assertions
     public void ShouldSupportMappingFromSourceToDestination(Type source, Type destination)
+#pragma warning restore S2699 // Tests should include assertions
     {
         var instance = GetInstanceOf(source);
 
         _mapper.Map(instance, source, destination);
     }
 
-    private object GetInstanceOf(Type type)
+    private static object GetInstanceOf(Type type)
     {
         if (type.GetConstructor(Type.EmptyTypes) != null)
             return Activator.CreateInstance(type)!;

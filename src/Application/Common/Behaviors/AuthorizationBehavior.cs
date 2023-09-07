@@ -2,7 +2,7 @@
 using System.Reflection;
 using Socials.Application.Common.Exceptions;
 using Socials.Application.Common.Interfaces;
-using Socials.Application.Common.Behaviors;
+using Socials.Application.Common.Security;
 
 namespace Socials.Application.Common.Behaviors;
 
