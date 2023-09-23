@@ -1,0 +1,11 @@
+﻿namespace [APP].Application.[ITEM]s.Commands.Update[Item];
+
+public class Update[ITEM]CommandValidator : AbstractValidator<Update[ITEM]Command>
+{
+    public Update[ITEM]CommandValidator()
+    {
+        RuleFor(v => v.Name)
+            .MaximumLength(200)
+            .NotEmpty();
+    }
+}

@@ -1,28 +1,18 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Socials.Application.Common.Interfaces;
 using Microsoft.Extensions.Logging;
 
 namespace Socials.Application.Common.Behaviors;
 
-public class PerformanceBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
+public class PerformanceBehavior<TRequest, TResponse>(
+    ILogger<TRequest> logger,
+    IUser user,
+    IIdentityService identityService) : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
 {
-    private readonly Stopwatch _timer;
-    private readonly ILogger<TRequest> _logger;
-    private readonly IUser _user;
-    private readonly IIdentityService _identityService;
-
-    public PerformanceBehavior(
-        ILogger<TRequest> logger,
-        IUser user,
-        IIdentityService identityService)
-    {
-        _timer = new Stopwatch();
-
-        _logger = logger;
-        _user = user;
-        _identityService = identityService;
-    }
+    private readonly Stopwatch _timer = new();
+    private readonly ILogger<TRequest> _logger = logger;
+    private readonly IUser _user = user;
+    private readonly IIdentityService _identityService = identityService;
 
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
@@ -34,20 +24,22 @@ public class PerformanceBehavior<TRequest, TResponse> : IPipelineBehavior<TReque
 
         var elapsedMilliseconds = _timer.ElapsedMilliseconds;
 
-        if (elapsedMilliseconds > 500)
+        if (elapsedMilliseconds <= 500)
         {
-            var requestName = typeof(TRequest).Name;
-            var userId = _user.Id ?? string.Empty;
-            var userName = string.Empty;
-
-            if (!string.IsNullOrEmpty(userId))
-            {
-                userName = await _identityService.GetUserNameAsync(userId);
-            }
-
-            _logger.LogWarning("Socials Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@UserId} {@UserName} {@Request}",
-                requestName, elapsedMilliseconds, userId, userName, request);
+            return response;
         }
+
+        var requestName = typeof(TRequest).Name;
+        var userId = _user.Id ?? string.Empty;
+        var userName = string.Empty;
+
+        if (!string.IsNullOrEmpty(userId))
+        {
+            userName = await _identityService.GetUserNameAsync(userId);
+        }
+
+        _logger.LogWarning("Socials Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@UserId} {@UserName} {@Request}",
+            requestName, elapsedMilliseconds, userId, userName, request);
 
         return response;
     }

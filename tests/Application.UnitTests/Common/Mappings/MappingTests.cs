@@ -50,7 +50,7 @@ public class MappingTests
         if (type.GetConstructor(Type.EmptyTypes) != null)
             return Activator.CreateInstance(type)!;
 
-        // Type without parameterless constructor
+        // Type without parameter-less constructor
         // TODO: Figure out an alternative approach to the now obsolete `FormatterServices.GetUninitializedObject` method.
 #pragma warning disable SYSLIB0050 // Type or member is obsolete
         return FormatterServices.GetUninitializedObject(type);

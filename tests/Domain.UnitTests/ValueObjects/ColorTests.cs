@@ -10,7 +10,7 @@ public class ColorTests
     [Test]
     public void ShouldReturnCorrectColorCode()
     {
-        var code = "#FFFFFF";
+        const string code = "#FFFFFF";
 
         var color = Color.From(code);
 

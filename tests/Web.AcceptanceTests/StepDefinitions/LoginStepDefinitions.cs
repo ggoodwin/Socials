@@ -1,14 +1,9 @@
 namespace Socials.Web.AcceptanceTests.StepDefinitions;
 
 [Binding]
-public sealed class LoginStepDefinitions
+public sealed class LoginStepDefinitions(LoginPage loginPage)
 {
-    private readonly LoginPage _loginPage;
-
-    public LoginStepDefinitions(LoginPage loginPage)
-    {
-        _loginPage = loginPage;
-    }
+    private readonly LoginPage _loginPage = loginPage;
 
     [BeforeFeature("Login")]
     public static async Task BeforeLoginScenario(IObjectContainer container)
@@ -44,7 +39,7 @@ public sealed class LoginStepDefinitions
     {
         await _loginPage.SetEmail("administrator@localhost");
         await _loginPage.SetPassword("Administrator1!");
-        await _loginPage.ClickLogin();
+        await _loginPage.ClickLogin().ConfigureAwait(false);
     }
 
     [Then("they log in successfully")]
@@ -61,7 +56,7 @@ public sealed class LoginStepDefinitions
     {
         await _loginPage.SetEmail("hacker@localhost");
         await _loginPage.SetPassword("l337hax!");
-        await _loginPage.ClickLogin();
+        await _loginPage.ClickLogin().ConfigureAwait(false);
     }
 
     [Then("an error is displayed")]

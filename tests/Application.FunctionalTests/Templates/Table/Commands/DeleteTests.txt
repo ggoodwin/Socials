@@ -1,0 +1,36 @@
+﻿using [APP].Application.TodoItems.Commands.CreateTodoItem;
+using [APP].Application.TodoItems.Commands.DeleteTodoItem;
+using [APP].Application.TodoLists.Commands.CreateTodoList;
+using [APP].Domain.Entities;
+
+namespace [APP].Application.FunctionalTests.[ITEM]s.Commands;
+
+using static Testing;
+
+public class Delete[ITEM]Tests : BaseTestFixture
+{
+    [Test]
+    public async Task ShouldRequireValid[ITEM]Id()
+    {
+        var command = new Delete[ITEM]Command(99);
+
+        await FluentActions.Invoking(() =>
+            SendAsync(command)).Should().ThrowAsync<NotFoundException>();
+    }
+
+    [Test]
+    public async Task ShouldDelete[ITEM]()
+    {
+
+        var itemId = await SendAsync(new Create[ITEM]Command
+        {
+            Name = "New Item"
+        });
+
+        await SendAsync(new Delete[ITEM]Command(itemId));
+
+        var item = await FindAsync<[ITEM]>(itemId);
+
+        item.Should().BeNull();
+    }
+}

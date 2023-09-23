@@ -2,17 +2,22 @@
 
 public class LoginPage : BasePage
 {
-    public LoginPage(IBrowser browser, IPage page)
+    private LoginPage(IBrowser browser, IPage page)
     {
         Browser = browser;
         Page = page;
+    }
+
+    public static LoginPage CreateInstance(IBrowser browser, IPage page)
+    {
+        return new LoginPage(browser, page);
     }
 
     public override string PagePath => $"{BaseUrl}/Identity/Account/Login";
 
     public override IBrowser Browser { get; }
 
-    public override IPage Page { get; set; }
+    public sealed override IPage Page { get; set; }
 
     public Task SetEmail(string email)
         => Page.FillAsync("#Input_Email", email);

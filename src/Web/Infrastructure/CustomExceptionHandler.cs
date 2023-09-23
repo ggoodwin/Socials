@@ -24,16 +24,17 @@ public class CustomExceptionHandler : IExceptionHandler
     {
         var exceptionType = exception.GetType();
 
-        if (_exceptionHandlers.ContainsKey(exceptionType))
+        if (!_exceptionHandlers.TryGetValue(exceptionType, out Func<HttpContext, Exception, Task>? value))
         {
-            await _exceptionHandlers[exceptionType].Invoke(httpContext, exception);
-            return true;
+            return false;
         }
 
-        return false;
+        await value.Invoke(httpContext, exception);
+        return true;
+
     }
 
-    private async Task HandleValidationException(HttpContext httpContext, Exception ex)
+    private static async Task HandleValidationException(HttpContext httpContext, Exception ex)
     {
         var exception = (ValidationException)ex;
 
@@ -46,7 +47,7 @@ public class CustomExceptionHandler : IExceptionHandler
         });
     }
 
-    private async Task HandleNotFoundException(HttpContext httpContext, Exception ex)
+    private static async Task HandleNotFoundException(HttpContext httpContext, Exception ex)
     {
         var exception = (NotFoundException)ex;
 
@@ -61,7 +62,7 @@ public class CustomExceptionHandler : IExceptionHandler
         });
     }
 
-    private async Task HandleUnauthorizedAccessException(HttpContext httpContext, Exception ex)
+    private static async Task HandleUnauthorizedAccessException(HttpContext httpContext, Exception ex)
     {
         httpContext.Response.StatusCode = StatusCodes.Status401Unauthorized;
 
@@ -73,7 +74,7 @@ public class CustomExceptionHandler : IExceptionHandler
         });
     }
 
-    private async Task HandleForbiddenAccessException(HttpContext httpContext, Exception ex)
+    private static async Task HandleForbiddenAccessException(HttpContext httpContext, Exception ex)
     {
         httpContext.Response.StatusCode = StatusCodes.Status403Forbidden;
 

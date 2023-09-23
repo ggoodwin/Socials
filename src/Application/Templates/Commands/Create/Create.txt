@@ -1,0 +1,29 @@
+﻿using [APP].Application.Common.Interfaces;
+using [APP].Domain.Entities;
+using [APP].Domain.Events;
+
+namespace [APP].Application.[ITEM]s.Commands.Create[ITEM];
+
+public record Create[ITEM]Command : IRequest<int>
+{
+    public string? Name { get; init; }
+}
+
+public class Create[ITEM]CommandHandler(IApplicationDbContext context) : IRequestHandler<Create[ITEM]Command, int>
+{
+    public async Task<int> Handle(Create[ITEM]Command request, CancellationToken cancellationToken)
+    {
+        var entity = new [ITEM]
+        {
+            Name = request.Name
+        };
+
+        entity.AddDomainEvent(new [ITEM]CreatedEvent(entity));
+
+        context.[ITEM]s.Add(entity);
+
+        await context.SaveChangesAsync(cancellationToken);
+
+        return entity.Id;
+    }
+}

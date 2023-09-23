@@ -3,17 +3,12 @@
 // Learn more: https://docs.microsoft.com/en-us/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/implement-value-objects
 public abstract class ValueObject
 {
-    protected static bool EqualOperator(ValueObject left, ValueObject right)
+    protected static bool EqualOperator(ValueObject? left, ValueObject? right)
     {
-        if (left is null ^ right is null)
-        {
-            return false;
-        }
-
-        return left?.Equals(right!) != false;
+        return !(left is null ^ right is null) && left?.Equals(right!) != false;
     }
 
-    protected static bool NotEqualOperator(ValueObject left, ValueObject right)
+    protected static bool NotEqualOperator(ValueObject? left, ValueObject? right)
     {
         return !(EqualOperator(left, right));
     }
@@ -34,7 +29,7 @@ public abstract class ValueObject
     public override int GetHashCode()
     {
         return GetEqualityComponents()
-            .Select(x => x != null ? x.GetHashCode() : 0)
+            .Select(x => x.GetHashCode())
             .Aggregate((x, y) => x ^ y);
     }
 }

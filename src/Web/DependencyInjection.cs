@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using ZymLabs.NSwag.FluentValidation;
 
+// ReSharper disable once CheckNamespace
 namespace Microsoft.Extensions.DependencyInjection;
 
 public static class DependencyInjection
@@ -48,19 +49,6 @@ public static class DependencyInjection
                 sp.CreateScope().ServiceProvider.GetRequiredService<FluentValidationSchemaProcessor>();
 
             configure.SchemaProcessors.Add(fluentValidationSchemaProcessor);
-
-#if (UseApiOnly)
-            // Add JWT
-            configure.AddSecurity("JWT", Enumerable.Empty<string>(), new OpenApiSecurityScheme
-            {
-                Type = OpenApiSecuritySchemeType.ApiKey,
-                Name = "Authorization",
-                In = OpenApiSecurityApiKeyLocation.Header,
-                Description = "Type into the textbox: Bearer {your JWT token}."
-            });
-
-            configure.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT"));
-#endif
         });
 
         return services;

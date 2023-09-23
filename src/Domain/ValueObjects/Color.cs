@@ -38,7 +38,7 @@ public class Color : ValueObject
 
     public static Color Grey => new("#999999");
 
-    public string Code { get; private set; } = "#000000";
+    public string Code { get; private init; } = "#000000";
 
     public static implicit operator string(Color color)
     {

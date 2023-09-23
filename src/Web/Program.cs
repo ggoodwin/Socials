@@ -42,10 +42,6 @@ app.MapFallbackToFile("index.html");
 
 app.UseExceptionHandler(options => { });
 
-#if (UseApiOnly)
-app.Map("/", () => Results.Redirect("/api"));
-#endif
-
 app.MapEndpoints();
 
 app.Run();

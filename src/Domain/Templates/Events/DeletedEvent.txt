@@ -1,0 +1,11 @@
+﻿namespace [APP].Domain.Events;
+
+public class [ITEM]DeletedEvent : BaseEvent
+{
+    public [ITEM]DeletedEvent([ITEM] item)
+    {
+        Item = item;
+    }
+
+    public [ITEM] Item { get; }
+}

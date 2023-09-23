@@ -1,0 +1,25 @@
+﻿using [APP].Application.Common.Interfaces;
+
+namespace [APP].Application.[ITEM]s.Commands.Update[ITEM];
+
+public record Update[ITEM]Command : IRequest
+{
+    public int Id { get; init; }
+
+    public string? Name { get; init; }
+}
+
+public class Update[ITEM]CommandHandler(IApplicationDbContext context) : IRequestHandler<Update[ITEM]Command>
+{
+    public async Task Handle(Update[ITEM]Command request, CancellationToken cancellationToken)
+    {
+        var entity = await context.[ITEM]s
+            .FindAsync(new object[] { request.Id }, cancellationToken);
+
+        Guard.Against.NotFound(request.Id, entity);
+
+        entity.Name = request.Name;
+
+        await context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+    }
+}

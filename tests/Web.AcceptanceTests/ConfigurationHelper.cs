@@ -4,29 +4,31 @@ namespace Socials.Web.AcceptanceTests;
 
 public static class ConfigurationHelper
 {
-    private readonly static IConfiguration _configuration;
+    private readonly static IConfiguration Configuration;
 
     static ConfigurationHelper()
     {
-        _configuration = new ConfigurationBuilder()
+        Configuration = new ConfigurationBuilder()
             .AddJsonFile("appsettings.json")
             .AddEnvironmentVariables()
             .Build();
     }
 
-    private static string? _baseUrl;
+    private static string? s_baseUrl;
 
     public static string GetBaseUrl()
     {
-        if (_baseUrl == null)
+        if (s_baseUrl != null)
         {
-            _baseUrl = _configuration["BaseUrl"];
-
-            ArgumentNullException.ThrowIfNull(_baseUrl);
-
-            _baseUrl = _baseUrl.TrimEnd('/');
+            return s_baseUrl;
         }
 
-        return _baseUrl;
+        s_baseUrl = Configuration["BaseUrl"];
+
+        ArgumentNullException.ThrowIfNull(s_baseUrl);
+
+        s_baseUrl = s_baseUrl.TrimEnd('/');
+
+        return s_baseUrl;
     }
 }

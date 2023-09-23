@@ -1,0 +1,15 @@
+﻿using [APP].Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace [APP].Infrastructure.Data.Configurations;
+
+public class [ITEM]Configuration : IEntityTypeConfiguration<[ITEM]>
+{
+    public void Configure(EntityTypeBuilder<[ITEM]> builder)
+    {
+        builder.Property(t => t.Name)
+            .HasMaxLength(200)
+            .IsRequired();
+    }
+}

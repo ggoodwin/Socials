@@ -11,7 +11,7 @@ namespace Socials.Application.FunctionalTests;
 [SetUpFixture]
 public partial class Testing
 {
-    private static ITestDatabase s_database;
+    private static ITestDatabase? s_database;
     private static CustomWebApplicationFactory s_factory = null!;
     private static IServiceScopeFactory s_scopeFactory = null!;
     private static string? s_userId;
@@ -97,7 +97,10 @@ public partial class Testing
     {
         try
         {
-            await s_database.ResetAsync();
+            if (s_database != null)
+            {
+                await s_database.ResetAsync();
+            }
         }
         catch (Exception) 
         {
@@ -141,7 +144,11 @@ public partial class Testing
     [OneTimeTearDown]
     public async Task RunAfterAnyTests()
     {
-        await s_database.DisposeAsync();
-        await s_factory.DisposeAsync();
+        if (s_database != null)
+        {
+            await s_database.DisposeAsync();
+        }
+
+        await s_factory.DisposeAsync().ConfigureAwait(false);
     }
 }

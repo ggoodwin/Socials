@@ -1,0 +1,22 @@
+﻿using [APP].Application.Common.Interfaces;
+using [APP].Application.Common.Mappings;
+using [APP].Application.Common.Models;
+
+namespace [APP].Application.[ITEM]s.Queries.GetAll[ITEM]sWithPagination;
+
+public record GetAll[ITEM]sWithPaginationQuery : IRequest<PaginatedList<[ITEM]BriefDto>>
+{
+    public int PageNumber { get; init; } = 1;
+    public int PageSize { get; init; } = 10;
+}
+
+public class GetAll[ITEM]sWithPaginationQueryHandler(IApplicationDbContext context, IMapper mapper) : IRequestHandler<GetAll[ITEM]sWithPaginationQuery, PaginatedList<[Item]BriefDto>>
+{
+    public async Task<PaginatedList<[ITEM]BriefDto>> Handle(GetAll[ITEM]sWithPaginationQuery request, CancellationToken cancellationToken)
+    {
+        return await _context.[ITEM]s
+            .OrderBy(x => x.Id)
+            .ProjectTo<[ITEM]BriefDto>(mapper.ConfigurationProvider)
+            .PaginatedListAsync(request.PageNumber, request.PageSize);
+    }
+}

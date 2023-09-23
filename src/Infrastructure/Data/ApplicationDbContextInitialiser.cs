@@ -10,34 +10,26 @@ using Microsoft.Extensions.Logging;
 
 namespace Socials.Infrastructure.Data;
 
-public static class InitialiserExtensions
+public static class InitializerExtensions
 {
     public static async Task InitialiseDatabaseAsync(this WebApplication app)
     {
         using var scope = app.Services.CreateScope();
 
-        var initialiser = scope.ServiceProvider.GetRequiredService<ApplicationDbContextInitialiser>();
+        var initializer = scope.ServiceProvider.GetRequiredService<ApplicationDbContextInitializer>();
 
-        await initialiser.InitialiseAsync();
+        await initializer.InitialiseAsync();
 
-        await initialiser.SeedAsync();
+        await initializer.SeedAsync();
     }
 }
 
-public class ApplicationDbContextInitialiser
+public class ApplicationDbContextInitializer(ILogger<ApplicationDbContextInitializer> logger, ApplicationDbContext context, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
 {
-    private readonly ILogger<ApplicationDbContextInitialiser> _logger;
-    private readonly ApplicationDbContext _context;
-    private readonly UserManager<ApplicationUser> _userManager;
-    private readonly RoleManager<IdentityRole> _roleManager;
-
-    public ApplicationDbContextInitialiser(ILogger<ApplicationDbContextInitialiser> logger, ApplicationDbContext context, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
-    {
-        _logger = logger;
-        _context = context;
-        _userManager = userManager;
-        _roleManager = roleManager;
-    }
+    private readonly ILogger<ApplicationDbContextInitializer> _logger = logger;
+    private readonly ApplicationDbContext _context = context;
+    private readonly UserManager<ApplicationUser> _userManager = userManager;
+    private readonly RoleManager<IdentityRole> _roleManager = roleManager;
 
     public async Task InitialiseAsync()
     {
@@ -47,7 +39,7 @@ public class ApplicationDbContextInitialiser
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "An error occurred while initialising the database.");
+            _logger.LogError(ex, "An error occurred while initializing the database");
             throw;
         }
     }
@@ -60,7 +52,7 @@ public class ApplicationDbContextInitialiser
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "An error occurred while seeding the database.");
+            _logger.LogError(ex, "An error occurred while seeding the database");
             throw;
         }
     }
@@ -98,7 +90,7 @@ public class ApplicationDbContextInitialiser
                 {
                     new TodoItem { Title = "Make a todo list 📃" },
                     new TodoItem { Title = "Check off the first item ✅" },
-                    new TodoItem { Title = "Realise you've already done two things on the list! 🤯"},
+                    new TodoItem { Title = "Realize you've already done two things on the list! 🤯"},
                     new TodoItem { Title = "Reward yourself with a nice, long nap 🏆" },
                 }
             });

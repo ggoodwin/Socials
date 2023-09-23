@@ -4,18 +4,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Socials.Application.Common.Behaviors;
 
-public class LoggingBehavior<TRequest> : IRequestPreProcessor<TRequest> where TRequest : notnull
+public class LoggingBehavior<TRequest>(ILogger logger, IUser user, IIdentityService identityService) : IRequestPreProcessor<TRequest> where TRequest : notnull
 {
-    private readonly ILogger _logger;
-    private readonly IUser _user;
-    private readonly IIdentityService _identityService;
-
-    public LoggingBehavior(ILogger<TRequest> logger, IUser user, IIdentityService identityService)
-    {
-        _logger = logger;
-        _user = user;
-        _identityService = identityService;
-    }
+    private readonly ILogger _logger = logger;
+    private readonly IUser _user = user;
+    private readonly IIdentityService _identityService = identityService;
 
     public async Task Process(TRequest request, CancellationToken cancellationToken)
     {

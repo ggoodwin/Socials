@@ -1,0 +1,10 @@
+﻿namespace [APP].Application.[ITEM]s.Queries.GetAll[ITEM]sByUser;
+
+public class GetAll[ITEM]sByUserQueryValidator : AbstractValidator<GetAll[ITEM]sByUserQuery>
+{
+    public GetAll[ITEM]sByUserQueryValidator()
+    {
+        RuleFor(x => x.UserId)
+            .NotEmpty().WithMessage("UserId is required.");
+    }
+}

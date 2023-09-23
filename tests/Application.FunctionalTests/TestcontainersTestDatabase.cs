@@ -35,7 +35,7 @@ public class TestContainersTestDatabase : ITestDatabase
 
         var context = new ApplicationDbContext(options);
 
-        context.Database.Migrate();
+        await context.Database.MigrateAsync();
 
         _respawner = await Respawner.CreateAsync(_connectionString, new RespawnerOptions
         {
@@ -56,6 +56,6 @@ public class TestContainersTestDatabase : ITestDatabase
     public async Task DisposeAsync()
     {
         await _connection.DisposeAsync();
-        await _container.DisposeAsync();
+        await _container.DisposeAsync().ConfigureAwait(false);
     }
 }

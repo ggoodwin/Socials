@@ -1,0 +1,21 @@
+﻿using [APP].Application.Common.Interfaces;
+using [APP].Application.Common.Mappings;
+using [APP].Application.Common.Models;
+
+namespace [APP].Application.[ITEM]s.Queries.Get[ITEM]ById;
+
+public record Get[ITEM]ByIdQuery : IRequest<[ITEM]BriefDto>
+{
+    public int Id { get; init }
+}
+
+public class Get[ITEM]ByIdQueryHandler(IApplicationDbContext context, IMapper mapper) : IRequestHandler<Get[ITEM]ByIdQuery, [Item]BriefDto>
+{
+    public async Task<[ITEM]BriefDto> Handle(Get[ITEM]ByIdQuery request, CancellationToken cancellationToken)
+    {
+        return await _context.[ITEM]s
+            .Where(x => x.Id == request.Id)
+            .ProjectTo<[ITEM]BriefDto>(mapper.ConfigurationProvider)
+            .FirstOrDefaultAsync();
+    }
+}

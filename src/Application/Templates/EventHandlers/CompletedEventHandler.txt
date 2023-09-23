@@ -1,0 +1,21 @@
+﻿using [APP].Domain.Events;
+using Microsoft.Extensions.Logging;
+
+namespace [APP].Application.[ITEM]s.EventHandlers;
+
+public class [ITEM]CompletedEventHandler : INotificationHandler<[ITEM]CompletedEvent>
+{
+    private readonly ILogger<[ITEM]CompletedEventHandler> _logger;
+
+    public [ITEM]CompletedEventHandler(ILogger<[ITEM]CompletedEventHandler> logger)
+    {
+        _logger = logger;
+    }
+
+    public Task Handle([ITEM]CompletedEvent notification, CancellationToken cancellationToken)
+    {
+        _logger.LogInformation("[APP] Domain Event: {DomainEvent}", notification.GetType().Name);
+
+        return Task.CompletedTask;
+    }
+}

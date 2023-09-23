@@ -1,0 +1,24 @@
+﻿using [APP].Application.Common.Interfaces;
+using [APP].Domain.Events;
+
+namespace [APP].Application.[ITEM]s.Commands.Delete[ITEM];
+
+public record Delete[ITEM]Command(int Id) : IRequest;
+
+public class Delete[ITEM]CommandHandler(IApplicationDbContext context) : IRequestHandler<Delete[ITEM]Command>
+{
+    public async Task Handle(Delete[ITEM]Command request, CancellationToken cancellationToken)
+    {
+        var entity = await context.[ITEM]s
+            .FindAsync(new object[] { request.Id }, cancellationToken);
+
+        Guard.Against.NotFound(request.Id, entity);
+
+        context.[ITEM]s.Remove(entity);
+
+        entity.AddDomainEvent(new [ITEM]DeletedEvent(entity));
+
+        await context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+    }
+
+}

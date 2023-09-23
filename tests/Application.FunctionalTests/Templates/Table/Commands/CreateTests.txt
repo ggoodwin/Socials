@@ -1,0 +1,42 @@
+﻿using [APP].Application.Common.Exceptions;
+using [APP].Application.TodoItems.Commands.CreateTodoItem;
+using [APP].Application.TodoLists.Commands.CreateTodoList;
+using [APP].Domain.Entities;
+
+namespace [APP].Application.FunctionalTests.[ITEM]s.Commands;
+
+using static Testing;
+
+public class Create[ITEM]Tests : BaseTestFixture
+{
+    [Test]
+    public async Task ShouldRequireMinimumFields()
+    {
+        var command = new Create[ITEM]Command();
+
+        await FluentActions.Invoking(() =>
+            SendAsync(command)).Should().ThrowAsync<ValidationException>();
+    }
+
+    [Test]
+    public async Task ShouldCreate[ITEM]()
+    {
+        var userId = await RunAsDefaultUserAsync();
+
+        var command = new Create[ITEM]Command
+        {
+            Name = "Name"
+        };
+
+        var itemId = await SendAsync(command);
+
+        var item = await FindAsync<[ITEM]>(itemId);
+
+        item.Should().NotBeNull();
+        item.Name.Should().Be(command.Name);
+        item.CreatedBy.Should().Be(userId);
+        item.Created.Should().BeCloseTo(DateTime.Now, TimeSpan.FromMilliseconds(10000));
+        item.LastModifiedBy.Should().Be(userId);
+        item.LastModified.Should().BeCloseTo(DateTime.Now, TimeSpan.FromMilliseconds(10000));
+    }
+}

@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Socials.Application.Common.Behaviors;
 
+// ReSharper disable once CheckNamespace
 namespace Microsoft.Extensions.DependencyInjection;
 
 public static class DependencyInjection

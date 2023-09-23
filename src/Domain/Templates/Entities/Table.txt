@@ -1,0 +1,6 @@
+﻿namespace [APP].Domain.Entities;
+
+public class [ITEM] : BaseAuditableEntity
+{
+    public int Id { get; set; }
+}

@@ -1,0 +1,11 @@
+﻿namespace [APP].Domain.Events;
+
+public class [ITEM]CreatedEvent : BaseEvent
+{
+    public [ITEM]CreatedEvent([ITEM] item)
+    {
+        Item = item;
+    }
+
+    public [ITEM] Item { get; }
+}

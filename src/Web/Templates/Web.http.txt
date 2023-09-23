@@ -1,0 +1,30 @@
+﻿# POST [ITEM]s
+POST {{Web_HostAddress}}/api/[ITEM]s
+Cookie: {{AuthCookieName}}={{AuthCookieValue}}
+Content-Type: application/json
+
+// Create[ITEM]Command
+{
+  "Name": "Eat a burrito 🌯"
+}
+
+###
+
+# PUT [ITEM]s
+PUT {{Web_HostAddress}}/api/[ITEM]s/1
+Cookie: {{AuthCookieName}}={{AuthCookieValue}}
+Content-Type: application/json
+
+// Update[ITEM]Command
+{
+  "Id": 1,
+  "Name": "Eat a yummy burrito 🌯"
+}
+
+###
+
+# DELETE [ITEM]
+DELETE {{Web_HostAddress}}/api/[ITEM]s/1
+Cookie: {{AuthCookieName}}={{AuthCookieValue}}
+
+###

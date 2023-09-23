@@ -1,0 +1,11 @@
+﻿namespace [APP].Domain.Events;
+
+public class [ITEM]CompletedEvent : BaseEvent
+{
+    public [ITEM]CompletedEvent([ITEM] item)
+    {
+        Item = item;
+    }
+
+    public [ITEM] Item { get; }
+}

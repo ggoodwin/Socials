@@ -1,0 +1,22 @@
+﻿using [APP].Application.Common.Interfaces;
+using [APP].Application.Common.Mappings;
+using [APP].Application.Common.Models;
+
+namespace [APP].Application.[ITEM]s.Queries.GetAll[ITEM]sByUser;
+
+public record GetAll[ITEM]sByUserQuery : IRequest<List<[ITEM]BriefDto>>
+{
+    public string UserId { get; init; }
+}
+
+public class GetAll[ITEM]sByUserQueryHandler(IApplicationDbContext context, IMapper mapper) : IRequestHandler<GetAll[ITEM]sByUserQuery, List<[Item]BriefDto>>
+{
+    public async Task<List<[ITEM]BriefDto>> Handle(GetAll[ITEM]sByUserQuery request, CancellationToken cancellationToken)
+    {
+        return await _context.[ITEM]s
+            .Where(x => x.UserId == request.UserId)
+            .OrderBy(x => x.Order)
+            .ProjectTo<[ITEM]BriefDto>(mapper.ConfigurationProvider)
+            .ToListAsync();
+    }
+}
