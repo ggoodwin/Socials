@@ -20,5 +20,4 @@ public class Delete[ITEM]CommandHandler(IApplicationDbContext context) : IReques
 
         await context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
     }
-
 }

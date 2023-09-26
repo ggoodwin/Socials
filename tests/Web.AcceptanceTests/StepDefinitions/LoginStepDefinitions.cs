@@ -21,7 +21,7 @@ public sealed class LoginStepDefinitions(LoginPage loginPage)
 
         var page = await browser.NewPageAsync();
 
-        var loginPage = new LoginPage(browser, page);
+        var loginPage = LoginPage.CreateInstance(browser, page);
 
         container.RegisterInstanceAs(playwright);
         container.RegisterInstanceAs(browser);

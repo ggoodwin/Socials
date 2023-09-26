@@ -31,7 +31,6 @@ public class CustomExceptionHandler : IExceptionHandler
 
         await value.Invoke(httpContext, exception);
         return true;
-
     }
 
     private static async Task HandleValidationException(HttpContext httpContext, Exception ex)

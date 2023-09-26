@@ -5,8 +5,7 @@ namespace [APP].Application.[ITEM]s.Commands.Update[ITEM];
 public record Update[ITEM]Command : IRequest
 {
     public int Id { get; init; }
-
-    public string? Name { get; init; }
+    public string? Title { get; init; }
 }
 
 public class Update[ITEM]CommandHandler(IApplicationDbContext context) : IRequestHandler<Update[ITEM]Command>
@@ -18,7 +17,7 @@ public class Update[ITEM]CommandHandler(IApplicationDbContext context) : IReques
 
         Guard.Against.NotFound(request.Id, entity);
 
-        entity.Name = request.Name;
+        entity.Title = request.Title;
 
         await context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
     }

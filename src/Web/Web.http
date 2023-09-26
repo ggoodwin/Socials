@@ -119,3 +119,34 @@ DELETE {{Web_HostAddress}}/api/TodoItems/1
 Cookie: {{AuthCookieName}}={{AuthCookieValue}}
 
 ###
+
+# POST LinkItems
+POST {{Web_HostAddress}}/api/LinkItems
+Cookie: {{AuthCookieName}}={{AuthCookieValue}}
+Content-Type: application/json
+
+// CreateLinkItemCommand
+{
+  "Name": "Eat a burrito 🌯"
+}
+
+###
+
+# PUT LinkItems
+PUT {{Web_HostAddress}}/api/LinkItems/1
+Cookie: {{AuthCookieName}}={{AuthCookieValue}}
+Content-Type: application/json
+
+// UpdateLinkItemCommand
+{
+  "Id": 1,
+  "Name": "Eat a yummy burrito 🌯"
+}
+
+###
+
+# DELETE LinkItem
+DELETE {{Web_HostAddress}}/api/LinkItems/1
+Cookie: {{AuthCookieName}}={{AuthCookieValue}}
+
+###

@@ -8,8 +8,8 @@ public class [ITEM]Configuration : IEntityTypeConfiguration<[ITEM]>
 {
     public void Configure(EntityTypeBuilder<[ITEM]> builder)
     {
-        builder.Property(t => t.Name)
-            .HasMaxLength(200)
+        builder.Property(t => t.Title)
+            .HasMaxLength(40)
             .IsRequired();
     }
 }

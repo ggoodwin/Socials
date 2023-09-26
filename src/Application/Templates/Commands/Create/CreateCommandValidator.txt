@@ -4,8 +4,8 @@ public class Create[ITEM]CommandValidator : AbstractValidator<Create[ITEM]Comman
 {
     public Create[ITEM]CommandValidator()
     {
-        RuleFor(v => v.Name)
-            .MaximumLength(200)
+        RuleFor(v => v.Title)
+            .MaximumLength(40)
             .NotEmpty();
     }
 }

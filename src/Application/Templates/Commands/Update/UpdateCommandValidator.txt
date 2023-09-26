@@ -4,7 +4,7 @@ public class Update[ITEM]CommandValidator : AbstractValidator<Update[ITEM]Comman
 {
     public Update[ITEM]CommandValidator()
     {
-        RuleFor(v => v.Name)
+        RuleFor(v => v.Title)
             .MaximumLength(200)
             .NotEmpty();
     }
