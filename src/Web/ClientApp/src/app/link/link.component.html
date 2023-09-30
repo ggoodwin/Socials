@@ -1,6 +1,6 @@
 <h1>Todo</h1>
 
-<p>This is a complex todo list component.</p>
+<p>This is a complex link list component.</p>
 
 <p *ngIf="!lists"><em>Loading...</em></p>
 
@@ -37,22 +37,22 @@
           <i class="bi bi-three-dots-vertical"></i>
         </button>
       </div>
-      <ul id="todo-items" class="list-group mb-2">
+      <ul id="link-items" class="list-group mb-2">
         <li class="list-group-item" *ngFor="let item of selectedList.items; index as i">
           <div class="d-flex">
-            <div class="todo-item-checkbox">
+            <div class="link-item-checkbox">
               <input type="checkbox" [(ngModel)]="item.done" (change)="updateItem(item)" />
             </div>
             <div class="flex-fill">
               <input id="{{ 'itemTitle' + i }}" *ngIf="item == selectedItem" type="text"
                 class="form-control item-input-control" [(ngModel)]="item.title" (keyup.enter)="updateItem(item, true)"
                 (blur)="updateItem(item)" autofocus="autofocus" maxlength="200" />
-              <div class="todo-item-title" *ngIf="item != selectedItem" [ngClass]="{ 'done-todo': item.done }"
+              <div class="link-item-title" *ngIf="item != selectedItem" [ngClass]="{ 'done-link': item.done }"
                 (click)="editItem(item, 'itemTitle' + i)" class="form-control item-input-control">
                 <span>{{ item.title }}</span>
               </div>
             </div>
-            <div class="todo-item-commands">
+            <div class="link-item-commands">
               <button *ngIf="item.id != 0" (click)="showItemDetailsModal(itemDetailsModalTemplate, item)"
                 class="btn btn-default btn-xs" role="button">
                 <i class="bi bi-three-dots-vertical"></i>

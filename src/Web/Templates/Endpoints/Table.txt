@@ -1,9 +1,11 @@
 ﻿using [APP].Application.Common.Models;
-using [APP].Application.TodoItems.Commands.CreateTodoItem;
-using [APP].Application.TodoItems.Commands.DeleteTodoItem;
-using [APP].Application.TodoItems.Commands.UpdateTodoItem;
-using [APP].Application.TodoItems.Commands.UpdateTodoItemDetail;
-using [APP].Application.TodoItems.Queries.GetTodoItemsWithPagination;
+using [APP].Application.[ITEM]s.Commands.Create[ITEM];
+using [APP].Application.[ITEM]s.Commands.Delete[ITEM];
+using [APP].Application.[ITEM]s.Commands.Update[ITEM];
+using [APP].Application.[ITEM]s.Queries;
+using [APP].Application.[ITEM]s.Queries.GetAll[ITEM]sByUser;
+using [APP].Application.[ITEM]s.Queries.GetAll[ITEM]sWithPagination;
+using [APP].Application.[ITEM]s.Queries.Get[ITEM]ById;
 
 namespace [APP].Web.Endpoints;
 

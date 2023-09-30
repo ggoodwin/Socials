@@ -1,6 +1,5 @@
-using Socials.Application.TodoItems.Commands.CreateTodoItem;
-using Socials.Application.TodoItems.Commands.DeleteTodoItem;
-using Socials.Application.TodoLists.Commands.CreateTodoList;
+using Socials.Application.LinkItems.Commands.CreateLinkItem;
+using Socials.Application.LinkItems.Commands.DeleteLinkItem;
 using Socials.Domain.Entities;
 
 namespace Socials.Application.FunctionalTests.LinkItems.Commands;
@@ -24,7 +23,7 @@ public class DeleteLinkItemTests : BaseTestFixture
 
         var itemId = await SendAsync(new CreateLinkItemCommand
         {
-            Name = "New Item"
+            Title = "New LinkItem"
         });
 
         await SendAsync(new DeleteLinkItemCommand(itemId));

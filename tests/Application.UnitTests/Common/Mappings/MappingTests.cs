@@ -3,8 +3,7 @@ using System.Runtime.Serialization;
 using AutoMapper;
 using Socials.Application.Common.Interfaces;
 using Socials.Application.Common.Models;
-using Socials.Application.TodoItems.Queries.GetTodoItemsWithPagination;
-using Socials.Application.TodoLists.Queries.GetTodos;
+using Socials.Application.LinkItems.Queries;
 using Socials.Domain.Entities;
 using NUnit.Framework;
 
@@ -30,11 +29,8 @@ public class MappingTests
     }
 
     [Test]
-    [TestCase(typeof(TodoList), typeof(TodoListDto))]
-    [TestCase(typeof(TodoItem), typeof(TodoItemDto))]
-    [TestCase(typeof(TodoList), typeof(LookupDto))]
-    [TestCase(typeof(TodoItem), typeof(LookupDto))]
-    [TestCase(typeof(TodoItem), typeof(TodoItemBriefDto))]
+    [TestCase(typeof(LinkItem), typeof(LookupDto))]
+    [TestCase(typeof(LinkItem), typeof(LinkItemBriefDto))]
     // TODO: Add more test cases and assertions
 #pragma warning disable S2699 // Tests should include assertions
     public void ShouldSupportMappingFromSourceToDestination(Type source, Type destination)

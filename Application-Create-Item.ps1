@@ -468,23 +468,23 @@ Write-Host "------------------------------------------------------" -ForegroundC
 Write-Host "Creating Application Functional Test Folders" -ForegroundColor Green
 # / Create Folders
 # Create Main Folder
-New-Item -Path "$($applicationFunctionalTests)\$($name)" -ItemType Directory
-Write-Host "Created Folder: '$($applicationFunctionalTests)\$($name)'" -ForegroundColor Green
+New-Item -Path "$($applicationFunctionalTests)\$($name)s" -ItemType Directory
+Write-Host "Created Folder: '$($applicationFunctionalTests)\$($name)s'" -ForegroundColor Green
 
 Write-Host "Creating Application Functional Test Files" -ForegroundColor Green
 # / Create Files
 # - Table
 #   - Commands
 #       - CreateTests.cs
-$filePath = "$($applicationFunctionalTests)\$($name)\Create$($name)Tests.cs"
+$filePath = "$($applicationFunctionalTests)\$($name)s\Commands\Create$($name)Tests.cs"
 New-Item -Path $filePath -ItemType File
 Write-Host "Created File: '$filePath'" -ForegroundColor Green
 #       - DeleteTests.cs
-$filePath = "$($applicationFunctionalTests)\$($name)\Delete$($name)Tests.cs"
+$filePath = "$($applicationFunctionalTests)\$($name)s\Commands\Delete$($name)Tests.cs"
 New-Item -Path $filePath -ItemType File
 Write-Host "Created File: '$filePath'" -ForegroundColor Green
 #       - UpdateTests.cs
-$filePath = "$($applicationFunctionalTests)\$($name)\Update$($name)Tests.cs"
+$filePath = "$($applicationFunctionalTests)\$($name)s\Commands\Update$($name)Tests.cs"
 New-Item -Path $filePath -ItemType File
 Write-Host "Created File: '$filePath'" -ForegroundColor Green
 
@@ -494,7 +494,7 @@ Write-Host "Writing Code to Application Functional Test Files" -ForegroundColor 
 #   - Commands
 #     - CreateTests.cs
 $templatePath = "$($afpTemplates)\Table\Commands\CreateTests.txt"
-$outputPath = "$($applicationFunctionalTests)\$($name)\Create$($name)Tests.cs"
+$outputPath = "$($applicationFunctionalTests)\$($name)s\Commands\Create$($name)Tests.cs"
 $templateContent = Get-Content -Path $templatePath -Raw
 $filledContent = $templateContent -replace "\[APP\]", $appname
 $filledContent = $filledContent -replace "\[ITEM\]", $name
@@ -502,7 +502,7 @@ $filledContent | Set-Content -Path $outputPath
 Write-Host "Edited File: '$outputPath'" -ForegroundColor Green
 #     - DeleteTests.cs
 $templatePath = "$($afpTemplates)\Table\Commands\DeleteTests.txt"
-$outputPath = "$($applicationFunctionalTests)\$($name)\Delete$($name)Tests.cs"
+$outputPath = "$($applicationFunctionalTests)\$($name)s\Commands\Delete$($name)Tests.cs"
 $templateContent = Get-Content -Path $templatePath -Raw
 $filledContent = $templateContent -replace "\[APP\]", $appname
 $filledContent = $filledContent -replace "\[ITEM\]", $name
@@ -510,7 +510,7 @@ $filledContent | Set-Content -Path $outputPath
 Write-Host "Edited File: '$outputPath'" -ForegroundColor Green
 #     - UpdateTests.cs
 $templatePath = "$($afpTemplates)\Table\Commands\UpdateTests.txt"
-$outputPath = "$($applicationFunctionalTests)\$($name)\Update$($name)Tests.cs"
+$outputPath = "$($applicationFunctionalTests)\$($name)s\Commands\Update$($name)Tests.cs"
 $templateContent = Get-Content -Path $templatePath -Raw
 $filledContent = $templateContent -replace "\[APP\]", $appname
 $filledContent = $filledContent -replace "\[ITEM\]", $name

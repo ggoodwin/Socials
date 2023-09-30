@@ -11,15 +11,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "src\Infra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web", "src\Web\Web.csproj", "{5E3DA8EC-EB23-4FDB-8D09-0EB4C82832FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.UnitTests", "tests\Application.UnitTests\Application.UnitTests.csproj", "{7B197E44-6418-4560-8344-CB8687CBAF76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.UnitTests", "tests\Application.UnitTests\Application.UnitTests.csproj", "{7B197E44-6418-4560-8344-CB8687CBAF76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.UnitTests", "tests\Domain.UnitTests\Domain.UnitTests.csproj", "{9C2C5E44-EBE4-40E4-B2A9-45AA36E128F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.UnitTests", "tests\Domain.UnitTests\Domain.UnitTests.csproj", "{9C2C5E44-EBE4-40E4-B2A9-45AA36E128F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.AcceptanceTests", "tests\Web.AcceptanceTests\Web.AcceptanceTests.csproj", "{6BBC9E5C-010C-4645-BA0C-BE5107624839}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.AcceptanceTests", "tests\Web.AcceptanceTests\Web.AcceptanceTests.csproj", "{6BBC9E5C-010C-4645-BA0C-BE5107624839}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.FunctionalTests", "tests\Application.FunctionalTests\Application.FunctionalTests.csproj", "{44087B45-B48B-41EA-B579-6799DD857785}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.FunctionalTests", "tests\Application.FunctionalTests\Application.FunctionalTests.csproj", "{44087B45-B48B-41EA-B579-6799DD857785}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.IntegrationTests", "tests\Infrastructure.IntegrationTests\Infrastructure.IntegrationTests.csproj", "{B7B7B10F-BC8A-4DE7-8EFF-D47F974CDB6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.IntegrationTests", "tests\Infrastructure.IntegrationTests\Infrastructure.IntegrationTests.csproj", "{B7B7B10F-BC8A-4DE7-8EFF-D47F974CDB6D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{87D75CA8-0048-4475-9591-15BFCC7DD892}"
 EndProject
@@ -29,8 +29,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
+		Application-Create-Item.ps1 = Application-Create-Item.ps1
 		Directory.Build.props = Directory.Build.props
 		Directory.Packages.props = Directory.Packages.props
+		.github\FUNDING.yml = .github\FUNDING.yml
 		global.json = global.json
 		README.md = README.md
 	EndProjectSection

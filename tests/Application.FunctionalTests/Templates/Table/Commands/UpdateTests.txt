@@ -1,6 +1,5 @@
-﻿using [APP].Application.TodoItems.Commands.CreateTodoItem;
-using [APP].Application.TodoItems.Commands.UpdateTodoItem;
-using [APP].Application.TodoLists.Commands.CreateTodoList;
+﻿using [APP].Application.[ITEM]s.Commands.Create[ITEM];
+using [APP].Application.[ITEM]s.Commands.Update[ITEM];
 using [APP].Domain.Entities;
 
 namespace [APP].Application.FunctionalTests.[ITEM]s.Commands;
@@ -12,7 +11,7 @@ public class Update[ITEM]Tests : BaseTestFixture
     [Test]
     public async Task ShouldRequireValid[ITEM]Id()
     {
-        var command = new Update[ITEM]Command { Id = 99, Name = "New Title" };
+        var command = new Update[ITEM]Command { Id = 99, Title = "New Title" };
         await FluentActions.Invoking(() => SendAsync(command)).Should().ThrowAsync<NotFoundException>();
     }
 
@@ -23,13 +22,13 @@ public class Update[ITEM]Tests : BaseTestFixture
 
         var itemId = await SendAsync(new Create[ITEM]Command
         {
-            Name = "New Item"
+            Title = "New [ITEM]"
         });
 
         var command = new Update[ITEM]Command
         {
             Id = itemId,
-            Name = "Updated Item Name"
+            Title = "Updated [ITEM] Title"
         };
 
         await SendAsync(command);
@@ -37,7 +36,7 @@ public class Update[ITEM]Tests : BaseTestFixture
         var item = await FindAsync<[ITEM]>(itemId);
 
         item.Should().NotBeNull();
-        item!.Name.Should().Be(command.Name);
+        item!.Title.Should().Be(command.Title);
         item.LastModifiedBy.Should().NotBeNull();
         item.LastModifiedBy.Should().Be(userId);
         item.LastModified.Should().BeCloseTo(DateTime.Now, TimeSpan.FromMilliseconds(10000));

@@ -1,6 +1,5 @@
-﻿using [APP].Application.TodoItems.Commands.CreateTodoItem;
-using [APP].Application.TodoItems.Commands.DeleteTodoItem;
-using [APP].Application.TodoLists.Commands.CreateTodoList;
+﻿using [APP].Application.[ITEM]s.Commands.Create[ITEM];
+using [APP].Application.[ITEM]s.Commands.Delete[ITEM];
 using [APP].Domain.Entities;
 
 namespace [APP].Application.FunctionalTests.[ITEM]s.Commands;
@@ -24,7 +23,7 @@ public class Delete[ITEM]Tests : BaseTestFixture
 
         var itemId = await SendAsync(new Create[ITEM]Command
         {
-            Name = "New Item"
+            Title = "New [ITEM]"
         });
 
         await SendAsync(new Delete[ITEM]Command(itemId));

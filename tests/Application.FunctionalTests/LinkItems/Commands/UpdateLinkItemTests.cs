@@ -1,6 +1,5 @@
-using Socials.Application.TodoItems.Commands.CreateTodoItem;
-using Socials.Application.TodoItems.Commands.UpdateTodoItem;
-using Socials.Application.TodoLists.Commands.CreateTodoList;
+using Socials.Application.LinkItems.Commands.CreateLinkItem;
+using Socials.Application.LinkItems.Commands.UpdateLinkItem;
 using Socials.Domain.Entities;
 
 namespace Socials.Application.FunctionalTests.LinkItems.Commands;
@@ -12,7 +11,7 @@ public class UpdateLinkItemTests : BaseTestFixture
     [Test]
     public async Task ShouldRequireValidLinkItemId()
     {
-        var command = new UpdateLinkItemCommand { Id = 99, Name = "New Title" };
+        var command = new UpdateLinkItemCommand { Id = 99, Title = "New Title" };
         await FluentActions.Invoking(() => SendAsync(command)).Should().ThrowAsync<NotFoundException>();
     }
 
@@ -23,13 +22,13 @@ public class UpdateLinkItemTests : BaseTestFixture
 
         var itemId = await SendAsync(new CreateLinkItemCommand
         {
-            Name = "New Item"
+            Title = "New LinkItem"
         });
 
         var command = new UpdateLinkItemCommand
         {
             Id = itemId,
-            Name = "Updated Item Name"
+            Title = "Updated LinkItem Title"
         };
 
         await SendAsync(command);
@@ -37,7 +36,7 @@ public class UpdateLinkItemTests : BaseTestFixture
         var item = await FindAsync<LinkItem>(itemId);
 
         item.Should().NotBeNull();
-        item!.Name.Should().Be(command.Name);
+        item!.Title.Should().Be(command.Title);
         item.LastModifiedBy.Should().NotBeNull();
         item.LastModifiedBy.Should().Be(userId);
         item.LastModified.Should().BeCloseTo(DateTime.Now, TimeSpan.FromMilliseconds(10000));

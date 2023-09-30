@@ -1,9 +1,11 @@
 using Socials.Application.Common.Models;
-using Socials.Application.TodoItems.Commands.CreateTodoItem;
-using Socials.Application.TodoItems.Commands.DeleteTodoItem;
-using Socials.Application.TodoItems.Commands.UpdateTodoItem;
-using Socials.Application.TodoItems.Commands.UpdateTodoItemDetail;
-using Socials.Application.TodoItems.Queries.GetTodoItemsWithPagination;
+using Socials.Application.LinkItems.Commands.CreateLinkItem;
+using Socials.Application.LinkItems.Commands.DeleteLinkItem;
+using Socials.Application.LinkItems.Commands.UpdateLinkItem;
+using Socials.Application.LinkItems.Queries;
+using Socials.Application.LinkItems.Queries.GetAllLinkItemsByUser;
+using Socials.Application.LinkItems.Queries.GetAllLinkItemsWithPagination;
+using Socials.Application.LinkItems.Queries.GetLinkItemById;
 
 namespace Socials.Web.Endpoints;
 

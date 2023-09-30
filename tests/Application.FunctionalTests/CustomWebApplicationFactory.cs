@@ -13,15 +13,8 @@ namespace Socials.Application.FunctionalTests;
 
 using static Testing;
 
-public class CustomWebApplicationFactory : WebApplicationFactory<Program>
+public class CustomWebApplicationFactory(DbConnection connection) : WebApplicationFactory<Program>
 {
-    private readonly DbConnection _connection;
-
-    public CustomWebApplicationFactory(DbConnection connection)
-    {
-        _connection = connection;
-    }
-
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.ConfigureTestServices(services =>
@@ -35,7 +28,7 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
                 .AddDbContext<ApplicationDbContext>((sp, options) =>
                 {
                     options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
-                    options.UseSqlServer(_connection);
+                    options.UseSqlServer(connection);
                 });
         });
     }
